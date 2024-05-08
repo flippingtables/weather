@@ -1,0 +1,48 @@
+<h1>Weather</h1>
+
+<mat-card class="weather-card">
+  @if (state().data; as weatherData) {
+
+  <mat-card-header>
+    <mat-card-title-group>
+      <mat-card-title
+        >Weather in {{ weatherData?.name }}, {{ weatherData.sys.country }}
+      </mat-card-title>
+      <mat-card-subtitle>
+        {{ weatherData.dt * 1000 | date : "short" }}
+      </mat-card-subtitle>
+
+      <app-weather-icon [weather]="weatherData.weather[0]" />
+    </mat-card-title-group>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div class="weather-description">
+      <span>Temperature: {{ weatherData.main.temp | json }}°C.</span>
+      <span>Feels like: {{ weatherData.main.feels_like | json }}°C.</span>
+      <span>{{ weatherData.weather[0].description | titlecase }}.</span>
+    </div>
+  </mat-card-content>
+
+  } @else if (state().loading) {
+
+  <mat-card-header>
+    <mat-card-title-group>
+      <mat-card-title>Getting weather...</mat-card-title>
+      <mat-card-subtitle></mat-card-subtitle>
+    </mat-card-title-group>
+  </mat-card-header>
+  <mat-card-content></mat-card-content>
+
+  } @else if (state().error) {
+
+  <mat-card-header>
+    <mat-card-title-group>
+      <mat-card-title>Error</mat-card-title>
+      <mat-card-subtitle></mat-card-subtitle>
+    </mat-card-title-group>
+  </mat-card-header>
+  <mat-card-content>{{ state().error?.message }}</mat-card-content>
+
+  }
+</mat-card>

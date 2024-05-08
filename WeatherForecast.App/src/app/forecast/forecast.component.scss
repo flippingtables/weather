@@ -1,0 +1,13 @@
+:host {
+  display: block;
+}
+
+.weather-card {
+  min-height: 150px;
+
+  .weather-description {
+    display: flex;
+    gap: 4px;
+    flex-direction: column;
+  }
+}
